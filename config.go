@@ -10,7 +10,7 @@ const (
 	// wmKeysym is the key to trigger taowm actions. For other possible
 	// values, such as xkSuperL for the 'Windows' key that is typically
 	// between the left Control and Alt keys, see keysym.go.
-	wmKeysym = xkCapsLock
+	wmKeysym = xkSuperL
 
 	// colorXxx are taowm's text and border colors. We assume 24-bit RGB.
 	colorBaseUnfocused  = 0x1f3f1f
@@ -69,12 +69,9 @@ var actions = map[int32]struct {
 	do  func(*workspace, interface{}) bool
 	arg interface{}
 }{
-	+' ':      {doExec, []string{"google-chrome"}},
-	^' ':      {doExec, []string{"google-chrome", "--incognito"}},
-	^'|':      {doExec, []string{"gnome-screensaver-command", "-l"}},
-	+xkReturn: {doExec, []string{"uxterm"}},
+	+xkReturn: {doExec, []string{"uxterm", "-bg", "black", "-fg", "white"}},
 	^xkReturn: {doExec, []string{"dmenu_run", "-nb", "#0f0f0f", "-nf", "#3f7f3f",
-		"-sb", "#0f0f0f", "-sf", "#7fff7f", "-l", "10"}},
+		"-sb", "#0f0f0f", "-sf", "#7fff7f", "-l", "10", "-fn", "WenQuanYi Micro Hei Mono:style=Regular:size=10"}},
 
 	+xkAudioLowerVolume: {doAudio, []string{"pactl", "set-sink-volume", "0", "--", "-5%"}},
 	+xkAudioRaiseVolume: {doAudio, []string{"pactl", "set-sink-volume", "0", "--", "+5%"}},
@@ -202,31 +199,4 @@ const (
 var programActions = map[string][nProgramActions]struct {
 	state  uint16
 	keysym xp.Keysym
-}{
-	"gnome-terminal": {
-		paTabNew:       {xp.ModMaskControl | xp.ModMaskShift, 'T'},
-		paTabClose:     {xp.ModMaskControl | xp.ModMaskShift, 'W'},
-		paTabPrev:      {xp.ModMaskControl, xkPageUp},
-		paTabNext:      {xp.ModMaskControl, xkPageDown},
-		paCut:          {xp.ModMaskControl | xp.ModMaskShift, 'C'},
-		paCopy:         {xp.ModMaskControl | xp.ModMaskShift, 'C'},
-		paPaste:        {xp.ModMaskControl | xp.ModMaskShift, 'V'},
-		paPasteSpecial: {xp.ModMaskControl | xp.ModMaskShift, 'V'},
-		paZoomIn:       {xp.ModMaskControl | xp.ModMaskShift, '+'},
-		paZoomOut:      {xp.ModMaskControl, '-'},
-		paZoomReset:    {xp.ModMaskControl, '0'},
-	},
-	"Google-chrome": {
-		paTabNew:       {xp.ModMaskControl, 't'},
-		paTabClose:     {xp.ModMaskControl, 'w'},
-		paTabPrev:      {xp.ModMaskControl, xkPageUp},
-		paTabNext:      {xp.ModMaskControl, xkPageDown},
-		paCut:          {xp.ModMaskControl, 'x'},
-		paCopy:         {xp.ModMaskControl, 'c'},
-		paPaste:        {xp.ModMaskControl, 'v'},
-		paPasteSpecial: {xp.ModMaskControl | xp.ModMaskShift, 'V'},
-		paZoomIn:       {xp.ModMaskControl | xp.ModMaskShift, '+'},
-		paZoomOut:      {xp.ModMaskControl, '-'},
-		paZoomReset:    {xp.ModMaskControl, '0'},
-	},
-}
+}{}
