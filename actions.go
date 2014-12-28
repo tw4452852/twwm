@@ -349,7 +349,21 @@ func doWindowSelect(k *workspace, b1 interface{}) bool {
 	return true
 }
 
-func doWorkspaceMigrate(k *workspace, _ interface{}) bool {
+func doWorkspaceMigrate(k *workspace, t interface{}) bool {
+	if t != nil {
+		if n, ok := t.(int); ok {
+			k1 := dummyWorkspace.link[next]
+			for ; n > 0 && k1 != &dummyWorkspace; n-- {
+				k1 = k1.link[next]
+			}
+			if k1 == &dummyWorkspace {
+				return false
+			}
+			doWindowSelect(k, false)
+			return doWorkspaceMigrate(k1, nil)
+		}
+	}
+
 	previous := k.dummyWindow.link[prev]
 	if k.focusedFrame.window != nil {
 		previous = k.focusedFrame.window
