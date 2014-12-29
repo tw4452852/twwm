@@ -72,6 +72,7 @@ var actions = map[int32]struct {
 	+xkReturn: {doExec, []string{"uxterm", "-bg", "black", "-fg", "white"}},
 	^xkReturn: {doExec, []string{"dmenu_run", "-nb", "#0f0f0f", "-nf", "#3f7f3f",
 		"-sb", "#0f0f0f", "-sf", "#7fff7f", "-l", "10", "-fn", "WenQuanYi Micro Hei Mono:style=Regular:size=10"}},
+	+'\\': {doExec, []string{"xautolock", "-locknow"}},
 
 	+xkAudioLowerVolume: {doAudio, []string{"pactl", "set-sink-volume", "0", "--", "-5%"}},
 	+xkAudioRaiseVolume: {doAudio, []string{"pactl", "set-sink-volume", "0", "--", "+5%"}},
