@@ -25,4 +25,6 @@ _testmain.go
 
 cscope.*
 *.sw[op]
-twwm
+
+cmd/twwm/twwm
+cmd/twwm-ping/twwm-ping
