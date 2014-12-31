@@ -217,7 +217,12 @@ func (k *workspace) configure() {
 }
 
 func (k *workspace) drawFrameBorders() {
-	if k.fullscreen || k.listing == listWorkspaces {
+	if k.listing == listWorkspaces {
+		return
+	}
+	if k.fullscreen {
+		setForeground(colorFocused)
+		k.mainFrame.drawBorder()
 		return
 	}
 	setForeground(colorUnfocused)
@@ -458,10 +463,10 @@ func (w *window) configure() {
 			// No-op; r is offscreen.
 		} else if k.fullscreen {
 			if k.focusedFrame == w.frame {
-				r.X = k.mainFrame.rect.X
-				r.Y = k.mainFrame.rect.Y
-				r.Width = k.mainFrame.rect.Width + 1
-				r.Height = k.mainFrame.rect.Height + 1
+				r.X = k.mainFrame.rect.X + 2
+				r.Y = k.mainFrame.rect.Y + 2
+				r.Width = k.mainFrame.rect.Width - 3
+				r.Height = k.mainFrame.rect.Height - 3
 			}
 		} else {
 			r.X = w.frame.rect.X + 2
