@@ -4,6 +4,7 @@ import (
 	"time"
 
 	xp "github.com/BurntSushi/xgb/xproto"
+	"github.com/tw4452852/twwm"
 )
 
 func handleButtonPress(e xp.ButtonPressEvent) {
@@ -98,7 +99,7 @@ func handleKeyPress(e xp.KeyPressEvent) {
 	}
 	if a := actions[keysym]; a.do != nil {
 		if a.do(screenContaining(e.RootX, e.RootY).workspace, a.arg) {
-			pulseChan <- time.Now()
+			twwm.PulseChan <- time.Now()
 		}
 	}
 }

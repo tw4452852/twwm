@@ -6,6 +6,7 @@ import (
 	"time"
 
 	xp "github.com/BurntSushi/xgb/xproto"
+	"github.com/tw4452852/twwm"
 )
 
 var desktopColor uint32
@@ -116,7 +117,6 @@ var (
 )
 
 var (
-	pulseChan     = make(chan time.Time)
 	pulseDoneChan = make(chan struct{})
 
 	colorUnfocused uint32 = colorBaseUnfocused
@@ -132,7 +132,7 @@ func runPulses() {
 	fChan := (chan func())(nil)
 	for {
 		select {
-		case when := <-pulseChan:
+		case when := <-twwm.PulseChan:
 			pulseTimeLock.Lock()
 			pulseTime = when
 			pulseTimeLock.Unlock()

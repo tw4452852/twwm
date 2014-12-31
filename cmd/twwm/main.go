@@ -8,6 +8,7 @@ import (
 	"github.com/BurntSushi/xgb"
 	"github.com/BurntSushi/xgb/xinerama"
 	xp "github.com/BurntSushi/xgb/xproto"
+	"github.com/tw4452852/twwm"
 )
 
 var (
@@ -169,7 +170,7 @@ func manage(xWin xp.Window, mapRequest bool) {
 			f.window, w.frame = w, f
 			callFocus = f == k.focusedFrame
 		} else {
-			pulseChan <- time.Now()
+			twwm.PulseChan <- time.Now()
 		}
 
 		check(xp.ChangeWindowAttributesChecked(xConn, xWin, xp.CwEventMask,
@@ -188,7 +189,7 @@ func manage(xWin xp.Window, mapRequest bool) {
 		focus(w)
 	}
 	makeLists()
-	pulseChan <- time.Now()
+	twwm.PulseChan <- time.Now()
 }
 
 func unmanage(xWin xp.Window) {
@@ -251,7 +252,7 @@ func unmanage(xWin xp.Window) {
 	w.link[prev].link[next] = w.link[next]
 	*w = window{}
 	makeLists()
-	pulseChan <- time.Now()
+	twwm.PulseChan <- time.Now()
 }
 
 type xEventOrError struct {
