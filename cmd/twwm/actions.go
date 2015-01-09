@@ -419,7 +419,9 @@ func doFullscreen(k *workspace, _ interface{}) bool {
 	if !k.fullscreen && k.focusedFrame.window == nil {
 		return true
 	}
+
 	k.fullscreen = !k.fullscreen
+
 	if p, err := xp.QueryPointer(xConn, rootXWin).Reply(); err != nil {
 		log.Println(err)
 	} else {
@@ -429,6 +431,7 @@ func doFullscreen(k *workspace, _ interface{}) bool {
 	if k.screen != nil {
 		k.screen.repaint()
 	}
+
 	return true
 }
 

@@ -216,7 +216,7 @@ func (k *workspace) configure() {
 	}
 }
 
-func (k *workspace) drawFrameBorders() {
+func (k *workspace) drawFrameBorders(colorFocused, colorUnfocused uint32) {
 	if k.listing == listWorkspaces {
 		return
 	}
@@ -465,8 +465,8 @@ func (w *window) configure() {
 			if k.focusedFrame == w.frame {
 				r.X = k.mainFrame.rect.X + 2
 				r.Y = k.mainFrame.rect.Y + 2
-				r.Width = k.mainFrame.rect.Width - 3
-				r.Height = k.mainFrame.rect.Height - 3
+				r.Width = k.mainFrame.rect.Width - 2
+				r.Height = k.mainFrame.rect.Height - 2
 			}
 		} else {
 			r.X = w.frame.rect.X + 2

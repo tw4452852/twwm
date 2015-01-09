@@ -47,7 +47,11 @@ func handleExpose(e xp.ExposeEvent) {
 	}
 	for _, s := range screens {
 		k := s.workspace
-		k.drawFrameBorders()
+		if k.fullscreen {
+			k.drawFrameBorders(0, 0)
+		} else {
+			k.drawFrameBorders(colorFocused, colorUnfocused)
+		}
 		if k.listing == listNone {
 			continue
 		}
@@ -164,6 +168,8 @@ func pulse() {
 	if !anyUnseenWindows && i > len(cos)/2 {
 		i = len(cos) / 2
 	}
+	repeat := i < len(cos)/2 || anyUnseenWindows
+
 	if quitting {
 		colorFocused = colorQuitFocused
 		colorUnfocused = colorQuitUnfocused
@@ -172,9 +178,13 @@ func pulse() {
 		colorUnfocused = blend(colorPulseUnfocused, colorBaseUnfocused, uint32(i))
 	}
 	for _, s := range screens {
-		s.workspace.drawFrameBorders()
+		if s.workspace.fullscreen && !repeat {
+			s.workspace.drawFrameBorders(0, 0)
+		} else {
+			s.workspace.drawFrameBorders(colorFocused, colorUnfocused)
+		}
 	}
-	if i < len(cos)/2 || anyUnseenWindows {
+	if repeat {
 		pulseDoneChan <- struct{}{}
 	}
 }
