@@ -643,7 +643,9 @@ func focus(w *window) {
 		xWin = w.xWin
 		if w.wmTakeFocus {
 			sendClientMessage(xWin, atomWMTakeFocus)
-			return
+			// we still continue to set input focus becasue
+			// some windows need one of their windows to be focus
+			// before itself
 		}
 	}
 	check(xp.SetInputFocusChecked(xConn, xp.InputFocusParent, xWin, eventTime))
