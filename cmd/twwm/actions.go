@@ -195,7 +195,7 @@ func doWorkspaceN(k0 *workspace, n1 interface{}) bool {
 
 func doWorkspaceNew(k0 *workspace, _ interface{}) bool {
 	s := k0.screen
-	changeWorkspace(s, k0, newWorkspace(s.rect, k0))
+	changeWorkspace(s, k0, newWorkspace(s.rect, dummyWorkspace.link[prev]))
 	return true
 }
 
