@@ -74,6 +74,7 @@ var actions = map[int32]struct {
 		"-sb", "#0f0f0f", "-sf", "#7fff7f", "-l", "10", "-i",
 		"-fn", "WenQuanYi Micro Hei Mono:style=Regular:size=10"}},
 	+'\\': {doExec, []string{"xautolock", "-locknow"}},
+	+'p':  {doExec, []string{"sh", "-c", "import /tmp/screenshot-$(date +%Y%m%d@%H%M%S).png"}},
 
 	+xkAudioLowerVolume: {doAudio, []string{"pactl", "set-sink-volume", "0", "--", "-5%"}},
 	+xkAudioRaiseVolume: {doAudio, []string{"pactl", "set-sink-volume", "0", "--", "+5%"}},
@@ -178,7 +179,6 @@ var actions = map[int32]struct {
 	+'v': {doProgramAction, paTabNext},
 	+'o': {doProgramAction, paCopy},
 	^'O': {doProgramAction, paCut},
-	+'p': {doProgramAction, paPaste},
 	^'P': {doProgramAction, paPasteSpecial},
 	+'z': {doProgramAction, paZoomIn},
 	^'Z': {doProgramAction, paZoomReset},
