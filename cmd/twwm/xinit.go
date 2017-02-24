@@ -10,9 +10,9 @@ import (
 )
 
 var (
+	atomNetWMName      xp.Atom
 	atomWMClass        xp.Atom
 	atomWMDeleteWindow xp.Atom
-	atomWMName         xp.Atom
 	atomWMProtocols    xp.Atom
 	atomWMTakeFocus    xp.Atom
 	atomWMTransientFor xp.Atom
@@ -40,9 +40,9 @@ func becomeTheWM() {
 }
 
 func initAtoms() {
+	atomNetWMName = internAtom("_NET_WM_NAME")
 	atomWMClass = internAtom("WM_CLASS")
 	atomWMDeleteWindow = internAtom("WM_DELETE_WINDOW")
-	atomWMName = internAtom("WM_NAME")
 	atomWMProtocols = internAtom("WM_PROTOCOLS")
 	atomWMTakeFocus = internAtom("WM_TAKE_FOCUS")
 	atomWMTransientFor = internAtom("WM_TRANSIENT_FOR")
