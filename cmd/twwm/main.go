@@ -302,6 +302,14 @@ func main() {
 		manage(c, false)
 	}
 
+	// add find functiono
+	go func() {
+		err := initFind()
+		if err != nil {
+			log.Println(err)
+		}
+	}()
+
 	// Process X events.
 	eeChan := make(chan xEventOrError)
 	go func() {
