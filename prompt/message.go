@@ -145,6 +145,9 @@ func (msg *Message) Show(workarea xrect.Rect, message string,
 			break
 		}
 	}
+	if width > workarea.Width()*3/4 {
+		width = workarea.Width() * 3 / 4
+	}
 	height += pad + bs
 	width += pad*2 + bs*2
 
