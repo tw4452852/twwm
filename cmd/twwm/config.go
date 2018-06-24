@@ -91,9 +91,9 @@ var actions = map[int32]struct {
 	+'\\':     {doExec, []string{"xautolock", "-locknow"}},
 	+'p':      {doExec, []string{"sh", "-c", "import /tmp/screenshot-$(date +%Y%m%d@%H%M%S).png"}},
 
-	+xkAudioLowerVolume: {doAudio, []string{"pactl", "set-sink-volume", "0", "--", "-5%"}},
-	+xkAudioRaiseVolume: {doAudio, []string{"pactl", "set-sink-volume", "0", "--", "+5%"}},
-	+xkAudioMute:        {doAudio, []string{"pactl", "set-sink-mute", "0", "toggle"}},
+	+xkAudioLowerVolume: {doAudio, []string{"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%"}},
+	+xkAudioRaiseVolume: {doAudio, []string{"pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%"}},
+	+xkAudioMute:        {doAudio, []string{"pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle"}},
 
 	+xkBackspace: {doWindowDelete, nil},
 	^xkEscape:    {doQuit, nil},
