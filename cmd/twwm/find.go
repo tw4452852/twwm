@@ -78,7 +78,7 @@ func showResult(cmd string, stdoutStderr []byte, err error) {
 	findWidget.message.Show(findWidget.geom, buf.String(), 0, nil)
 }
 
-func doFind() bool {
+func doFind() {
 	var showGroups = make(map[*prompt.SelectGroupItem][]*prompt.SelectItem)
 	findItems.Range(func(k, v interface{}) bool {
 		groupName := k.(string)
@@ -105,8 +105,6 @@ func doFind() bool {
 		findWidget.slct.Show(findWidget.geom, prompt.TabCompleteCustom, newShowGroups(showGroups), nil)
 	}).Connect(findWidget.x, findWidget.x.RootWin(), selectActivate, true)
 	xevent.Main(findWidget.x)
-	return true
-
 }
 
 func headGeom(X *xgbutil.XUtil) (xrect.Rect, error) {
@@ -135,7 +133,7 @@ func initFind() error {
 	if err != nil {
 		return err
 	}
-	doFind()
+	go doFind()
 	return nil
 }
 

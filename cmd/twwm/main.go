@@ -303,12 +303,10 @@ func main() {
 	}
 
 	// add find functiono
-	go func() {
-		err := initFind()
-		if err != nil {
-			log.Println(err)
-		}
-	}()
+	err = initFind()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Process X events.
 	eeChan := make(chan xEventOrError)
