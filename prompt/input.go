@@ -3,22 +3,18 @@ package prompt
 import (
 	"bytes"
 	"image/color"
-	"log"
 
 	"github.com/BurntSushi/freetype-go/freetype/truetype"
-
+	"github.com/BurntSushi/wingo/render"
+	"github.com/BurntSushi/wingo/text"
 	"github.com/BurntSushi/xgb/xproto"
-
 	"github.com/BurntSushi/xgbutil"
 	"github.com/BurntSushi/xgbutil/keybind"
 	"github.com/BurntSushi/xgbutil/xevent"
 	"github.com/BurntSushi/xgbutil/xgraphics"
 	"github.com/BurntSushi/xgbutil/xrect"
 	"github.com/BurntSushi/xgbutil/xwindow"
-
-	"github.com/BurntSushi/wingo/misc"
-	"github.com/BurntSushi/wingo/render"
-	"github.com/BurntSushi/wingo/text"
+	"golang.org/x/image/font/gofont/goregular"
 )
 
 type Input struct {
@@ -138,7 +134,7 @@ func (inp *Input) Show(workarea xrect.Rect, label, prompt string,
 	posx := workarea.X() + workarea.Width()/2 - width/2
 	posy := workarea.Y() + workarea.Height()/2 - height/2
 
-	log.Printf("%d %d %d %d\n", posx, posy, width, height)
+	// log.Printf("%d %d %d %d\n", posx, posy, width, height)
 	inp.win.MoveResize(posx, posy, width, height)
 	inp.label.Move(bs+pad, pad+bs)
 	inp.bInp.MoveResize(pad+inp.label.Geom.X()+inp.label.Geom.Width(), 0,
@@ -250,8 +246,7 @@ var DefaultInputTheme = &InputTheme{
 	BorderColor: render.NewImageColor(color.RGBA{0x0, 0x0, 0x0, 0xff}),
 	Padding:     10,
 
-	Font: xgraphics.MustFont(xgraphics.ParseFont(
-		bytes.NewBuffer(misc.DataFile("DejaVuSans.ttf")))),
+	Font:       xgraphics.MustFont(xgraphics.ParseFont(bytes.NewBuffer(goregular.TTF))),
 	FontSize:   20.0,
 	FontColor:  render.NewImageColor(color.RGBA{0x0, 0x0, 0x0, 0xff}),
 	InputWidth: 500,

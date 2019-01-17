@@ -6,9 +6,10 @@ import (
 	"strings"
 
 	"github.com/BurntSushi/freetype-go/freetype/truetype"
-
+	"github.com/BurntSushi/wingo/misc"
+	"github.com/BurntSushi/wingo/render"
+	"github.com/BurntSushi/wingo/text"
 	"github.com/BurntSushi/xgb/xproto"
-
 	"github.com/BurntSushi/xgbutil"
 	"github.com/BurntSushi/xgbutil/keybind"
 	"github.com/BurntSushi/xgbutil/mousebind"
@@ -16,10 +17,7 @@ import (
 	"github.com/BurntSushi/xgbutil/xgraphics"
 	"github.com/BurntSushi/xgbutil/xrect"
 	"github.com/BurntSushi/xgbutil/xwindow"
-
-	"github.com/BurntSushi/wingo/misc"
-	"github.com/BurntSushi/wingo/render"
-	"github.com/BurntSushi/wingo/text"
+	"golang.org/x/image/font/gofont/goregular"
 )
 
 const (
@@ -441,17 +439,15 @@ var DefaultSelectTheme = &SelectTheme{
 	BorderColor: render.NewImageColor(color.RGBA{0x0, 0x0, 0x0, 0xff}),
 	Padding:     2,
 
-	Font: xgraphics.MustFont(xgraphics.ParseFont(
-		bytes.NewBuffer(misc.DataFile("DejaVuSans.ttf")))),
+	Font:      xgraphics.MustFont(xgraphics.ParseFont(bytes.NewBuffer(goregular.TTF))),
 	FontSize:  10.0,
 	FontColor: render.NewImageColor(color.RGBA{0x0, 0x0, 0x0, 0xff}),
 
 	ActiveBgColor:   render.NewImageColor(color.RGBA{0x0, 0x0, 0x0, 0xff}),
 	ActiveFontColor: render.NewImageColor(color.RGBA{0xff, 0xff, 0xff, 0xff}),
 
-	GroupBgColor: render.NewImageColor(color.RGBA{0xff, 0xff, 0xff, 0xff}),
-	GroupFont: xgraphics.MustFont(xgraphics.ParseFont(
-		bytes.NewBuffer(misc.DataFile("DejaVuSans.ttf")))),
+	GroupBgColor:   render.NewImageColor(color.RGBA{0xff, 0xff, 0xff, 0xff}),
+	GroupFont:      xgraphics.MustFont(xgraphics.ParseFont(bytes.NewBuffer(goregular.TTF))),
 	GroupFontSize:  15.0,
 	GroupFontColor: render.NewImageColor(color.RGBA{0x33, 0x66, 0xff, 0xff}),
 	GroupSpacing:   5,
