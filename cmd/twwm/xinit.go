@@ -218,7 +218,7 @@ func initKeyboardMapping() {
 	}
 
 	// Swap Left Control and Caps Lock
-	if err := exec.Command("setxkbmap", "-option", "ctrl:swapcaps").Start(); err != nil {
+	if err := exec.Command("setxkbmap", "-option", "ctrl:swapcaps").Run(); err != nil {
 		log.Fatalf("swap left control and caps lock failed: %v", err)
 	}
 }

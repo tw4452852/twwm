@@ -290,8 +290,6 @@ type xEventOrError struct {
 }
 
 func main() {
-	initSubreap()
-
 	var err error
 	xConn, err = xgb.NewConn()
 	if err != nil {
