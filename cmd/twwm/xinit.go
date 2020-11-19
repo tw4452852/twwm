@@ -216,11 +216,6 @@ func initKeyboardMapping() {
 			log.Fatalf("setxkbmap failed: %v", err)
 		}
 	}
-
-	// Swap Left Control and Caps Lock
-	if err := exec.Command("setxkbmap", "-option", "ctrl:swapcaps").Run(); err != nil {
-		log.Fatalf("swap left control and caps lock failed: %v", err)
-	}
 }
 
 func findKeycode(keysym xp.Keysym) (keycode xp.Keycode, shift bool) {
