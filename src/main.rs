@@ -27,6 +27,7 @@ fn main() -> penrose::Result<()> {
     let config = Config::default()
         .builder()
         .focused_border(0xd7afff)
+        .gap_px(1)
         .build()
         .unwrap();
 
