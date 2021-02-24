@@ -19,6 +19,7 @@ const FONT: &str = "Go Mono";
 
 const TERMINAL: &str = "urxvt";
 const CLOCK: &str = "dclock -bg black -led_off black -date '%Y-%b-%d-%a' -bw 0";
+const LOCK: &str = "xautolock -locknow";
 
 fn main() -> penrose::Result<()> {
     SimpleLogger::init(LevelFilter::Info, simplelog::Config::default())
@@ -71,6 +72,7 @@ fn main() -> penrose::Result<()> {
 
         "M-semicolon" => run_external!("dmenu_run");
         "M-Return" => run_external!(TERMINAL);
+        "M-l" => run_external!(LOCK);
         "M-slash" => sp.toggle();
         "M-C-Escape" => run_internal!(exit);
 
